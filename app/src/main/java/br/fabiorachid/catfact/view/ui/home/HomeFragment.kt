@@ -1,4 +1,4 @@
-package br.fabiorachid.catfact.ui.home
+package br.fabiorachid.catfact.view.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.fabiorachid.catfact.databinding.FragmentHomeBinding
+import br.fabiorachid.catfact.viewmodel.FactsViewModel
 
 class HomeFragment : Fragment() {
 
@@ -22,14 +23,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
+        val factViewModel =
+            ViewModelProvider(this)[FactsViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        factViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
