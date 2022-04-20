@@ -1,4 +1,4 @@
-package br.fabiorachid.catfact.ui.notifications
+package br.fabiorachid.catfact.view.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import br.fabiorachid.catfact.databinding.FragmentNotificationsBinding
+import br.fabiorachid.catfact.databinding.FragmentHomeBinding
+import br.fabiorachid.catfact.viewmodel.FactsViewModel
 
-class NotificationsFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +23,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val factViewModel =
+            ViewModelProvider(this)[FactsViewModel::class.java]
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textHome
+        factViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

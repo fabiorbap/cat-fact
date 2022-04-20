@@ -1,4 +1,4 @@
-package br.fabiorachid.catfact.ui.dashboard
+package br.fabiorachid.catfact.view.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.fabiorachid.catfact.databinding.FragmentDashboardBinding
+import br.fabiorachid.catfact.viewmodel.FactsViewModel
 
-class DashboardFragment : Fragment() {
+class FavoritesFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
@@ -22,14 +23,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val factsViewModel =
+            ViewModelProvider(this)[FactsViewModel::class.java]
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        factsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

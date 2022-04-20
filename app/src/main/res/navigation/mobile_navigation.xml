@@ -7,19 +7,14 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="br.fabiorachid.catfact.ui.home.HomeFragment"
+        android:name="br.fabiorachid.catfact.view.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="br.fabiorachid.catfact.ui.dashboard.DashboardFragment"
+        android:name="br.fabiorachid.catfact.view.ui.favorites.FavoritesFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="br.fabiorachid.catfact.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
 </navigation>
