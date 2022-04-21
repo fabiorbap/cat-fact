@@ -26,7 +26,8 @@ ext {
     navigationVersion = '2.4.2'
     roomVersion = '2.4.2'
     retrofitVersion = '2.9.0'
-    gsonVersion = '2.3.0'
+    gsonVersion = '2.5.0'
     retrofitRxJava2AdapterVersion = '2.6.0'
     okHttpLoggingVersion = '3.10.0'
+    koinVersion = '3.2.0-beta-1'
 }
