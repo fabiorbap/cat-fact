@@ -1,4 +1,4 @@
-package br.fabiorachid.catfact.model.data
+package br.fabiorachid.catfact.model.data.api.fact
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,10 +1,10 @@
 package br.fabiorachid.catfact.model.datasources
 
-import br.fabiorachid.catfact.model.data.FactApiResponse
+import br.fabiorachid.catfact.model.data.app.fact.FactAppModel
 import io.reactivex.Single
 
 interface FactsRemoteDataSource {
 
-    fun getFact(): Single<FactApiResponse>
+    fun getFact(): Single<FactAppModel>
 
 }
