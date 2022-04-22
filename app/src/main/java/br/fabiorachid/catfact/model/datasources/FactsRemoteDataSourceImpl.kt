@@ -1,4 +1,6 @@
 package br.fabiorachid.catfact.model.datasources
 
-class FactsRemoteDataSourceImpl : FactsRemoteDataSource {
+import br.fabiorachid.catfact.model.ApiInterface
+
+class FactsRemoteDataSourceImpl (val api: ApiInterface) : FactsRemoteDataSource {
 }
