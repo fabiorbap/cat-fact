@@ -2,6 +2,7 @@ package br.fabiorachid.catfact
 
 import android.app.Application
 import br.fabiorachid.catfact.di.appModule
+import br.fabiorachid.catfact.di.modelModule
 import br.fabiorachid.catfact.di.networkModule
 import br.fabiorachid.catfact.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -17,6 +18,7 @@ class CatFactApplication : Application() {
 
     private fun initializeKoin() {
         val listOfModules = listOf(appModule,
+            modelModule,
             networkModule,
             viewModelModule)
         startKoin{
