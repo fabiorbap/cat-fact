@@ -40,6 +40,7 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         onFactButtonClick()
         observeLiveData()
+        getFact()
     }
 
     private fun getFact() {
