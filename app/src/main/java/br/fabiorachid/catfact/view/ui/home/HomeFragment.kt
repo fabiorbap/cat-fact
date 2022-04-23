@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import br.fabiorachid.catfact.R
 import br.fabiorachid.catfact.databinding.FragmentHomeBinding
+import br.fabiorachid.catfact.model.data.ErrorType
 import br.fabiorachid.catfact.model.data.ResponseStatus
 import br.fabiorachid.catfact.model.data.app.fact.FactAppModel
+import br.fabiorachid.catfact.model.data.mapError
 import br.fabiorachid.catfact.utils.showSnackbar
+import br.fabiorachid.catfact.view.ui.BaseFragment
 import br.fabiorachid.catfact.viewmodel.FactsViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -67,7 +71,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun onGetFactError(error: Error?) {
-        showSnackbar(error?.message ?: "", null, null, _binding?.textHome)
+        when(mapError(error as? Throwable, requireContext())) {
+            ErrorType.NETWORK -> showNetworkError(this::getFact, _binding?.constraintRoot)
+            ErrorType.DEFAULT -> showGenericError(this::getFact, _binding?.constraintRoot)
+            else -> showGenericError(this::getFact, _binding?.constraintRoot)
+        }
+
     }
 
     override fun onDestroyView() {

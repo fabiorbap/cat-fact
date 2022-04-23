@@ -11,7 +11,7 @@ enum class ErrorType {
     DEFAULT
 }
 
-fun mapError(error: Throwable, context: Context): ErrorType {
+fun mapError(error: Throwable?, context: Context): ErrorType {
     return if (ConnectionUtil.isOnline(context))
         ErrorType.NETWORK
     else ErrorType.DEFAULT

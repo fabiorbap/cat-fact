@@ -9,11 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import br.fabiorachid.catfact.databinding.FragmentDashboardBinding
+import br.fabiorachid.catfact.view.ui.BaseFragment
 import br.fabiorachid.catfact.viewmodel.FactsViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : BaseFragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val factsViewModel: FactsViewModel by sharedViewModel()
