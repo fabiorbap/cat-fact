@@ -30,4 +30,5 @@ ext {
     retrofitRxJava2AdapterVersion = '2.6.0'
     okHttpLoggingVersion = '3.10.0'
     koinVersion = '3.2.0-beta-1'
+    rxJava2Version = '2.1.0'
 }

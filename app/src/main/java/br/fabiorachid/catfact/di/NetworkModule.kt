@@ -9,7 +9,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val BASE_URL = "https://catfact.ninja/"
+const val BASE_URL = "https://catfact.ninja"
 const val TIMEOUT_DURATION = 10L
 
 val networkModule = module {

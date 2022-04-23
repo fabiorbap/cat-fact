@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Cat Fact</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+
+    <!-- Home -->
+    <string name="home_title">Home</string>
+
+    <!-- Favorites -->
+    <string name="favorites_title">Favorites</string>
+
+    <!-- Generic -->
+    <string name="network_error_text">Please check your internet connection or retry.</string>
+    <string name="generic_error_text">Oops! Something went wrong.</string>
+    <string name="retry">Retry</string>
+
+
 </resources>

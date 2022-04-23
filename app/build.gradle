@@ -67,9 +67,13 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.ext.retrofitRxJava2AdapterVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.okHttpLoggingVersion}"
 
+    // RxJava2
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJava2Version"
+
     // Koin
     implementation "io.insert-koin:koin-android:$koinVersion"
     implementation "io.insert-koin:koin-android-compat:$koinVersion"
     implementation "io.insert-koin:koin-androidx-navigation:$koinVersion"
     implementation "io.insert-koin:koin-androidx-compose:$koinVersion"
+
 }
