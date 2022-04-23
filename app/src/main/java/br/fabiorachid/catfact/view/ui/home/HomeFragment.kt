@@ -77,9 +77,9 @@ class HomeFragment : BaseFragment() {
     private fun onGetFactError(error: Error?) {
         _binding?.btnFact?.enable()
         when(mapError(error as? Throwable, requireContext())) {
-            ErrorType.NETWORK -> showNetworkError(this::getFact, _binding?.constraintRoot)
-            ErrorType.DEFAULT -> showGenericError(this::getFact, _binding?.constraintRoot)
-            else -> showGenericError(this::getFact, _binding?.constraintRoot)
+            ErrorType.NETWORK -> showNetworkError(this::getFact, _binding?.root)
+            ErrorType.DEFAULT -> showGenericError(this::getFact, _binding?.root)
+            else -> showGenericError(this::getFact, _binding?.root)
         }
 
     }
