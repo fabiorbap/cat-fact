@@ -12,6 +12,8 @@ import br.fabiorachid.catfact.model.data.ErrorType
 import br.fabiorachid.catfact.model.data.ResponseStatus
 import br.fabiorachid.catfact.model.data.app.fact.FactAppModel
 import br.fabiorachid.catfact.model.data.mapError
+import br.fabiorachid.catfact.utils.disable
+import br.fabiorachid.catfact.utils.enable
 import br.fabiorachid.catfact.utils.showSnackbar
 import br.fabiorachid.catfact.view.ui.BaseFragment
 import br.fabiorachid.catfact.viewmodel.FactsViewModel
@@ -64,14 +66,16 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun onGetFactLoading() {
-
+        _binding?.btnFact?.disable()
     }
 
     private fun onGetFactSuccess(it: FactAppModel?) {
         _binding?.textHome?.text = it?.fact
+        _binding?.btnFact?.enable()
     }
 
     private fun onGetFactError(error: Error?) {
+        _binding?.btnFact?.enable()
         when(mapError(error as? Throwable, requireContext())) {
             ErrorType.NETWORK -> showNetworkError(this::getFact, _binding?.constraintRoot)
             ErrorType.DEFAULT -> showGenericError(this::getFact, _binding?.constraintRoot)
