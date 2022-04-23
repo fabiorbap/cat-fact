@@ -1,4 +1,6 @@
-package br.fabiorachid.catfact.model.data
+package br.fabiorachid.catfact.model.data.remote
+
+import br.fabiorachid.catfact.model.data.remote.app.error.Error
 
 sealed class ResponseStatus {
     object LOADING : ResponseStatus()

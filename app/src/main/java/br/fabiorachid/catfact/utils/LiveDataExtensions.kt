@@ -1,8 +1,9 @@
 package br.fabiorachid.catfact.utils
 
 import androidx.lifecycle.MutableLiveData
-import br.fabiorachid.catfact.model.data.Response
-import br.fabiorachid.catfact.model.data.ResponseStatus
+import br.fabiorachid.catfact.model.data.remote.Response
+import br.fabiorachid.catfact.model.data.remote.ResponseStatus
+import br.fabiorachid.catfact.model.data.remote.app.error.Error
 
 fun <T> MutableLiveData<Response<T>>.setSuccess(data: T? = null) =
     postValue(Response(ResponseStatus.SUCCESS, data))

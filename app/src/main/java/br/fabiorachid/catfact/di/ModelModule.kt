@@ -13,5 +13,5 @@ val modelModule = module {
 
     single<FactsRemoteDataSource> { FactsRemoteDataSourceImpl(get()) }
 
-    single<FactsLocalDataSource> { FactsLocalDataSourceImpl() }
+    single<FactsLocalDataSource> { FactsLocalDataSourceImpl(get()) }
 }

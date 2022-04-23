@@ -1,4 +1,4 @@
-package br.fabiorachid.catfact.model.data.app.fact
+package br.fabiorachid.catfact.model.data.remote.app.fact
 
 import com.google.gson.annotations.SerializedName
 
