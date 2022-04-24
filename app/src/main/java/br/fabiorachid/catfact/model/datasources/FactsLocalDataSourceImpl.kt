@@ -18,4 +18,10 @@ class FactsLocalDataSourceImpl(private val factsDatabase: FactsDatabase) : Facts
     override fun getFavoriteFacts(): Single<List<FactLocalModel>> {
         return factsDatabase.factsDao.getFavoriteFacts()
     }
+
+    override fun deleteFactFromFavorites(factLocalModel: FactLocalModel): Completable {
+        return Completable.fromCallable {
+            factsDatabase.factsDao.deleteFactFromFavorites(factLocalModel)
+        }
+    }
 }

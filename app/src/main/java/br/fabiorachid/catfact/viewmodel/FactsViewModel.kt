@@ -31,10 +31,12 @@ class FactsViewModel(
     private val _addFavoriteFactMLD = SingleLiveEvent<Response<Nothing>>()
     val addFavoriteFactLD: SingleLiveEvent<Response<Nothing>> = _addFavoriteFactMLD
 
+    private val _deleteFavoriteFactMLD = SingleLiveEvent<Response<Int>>()
+    val deleteFavoriteFactLD: SingleLiveEvent<Response<Int>> = _deleteFavoriteFactMLD
+
     var hasFactBeenLoaded: Boolean = false
         set(value) {
             field = value
-            // Simply update the savedState every time your saved property changes
             savedState.set(HAS_FACT_BEEN_LOADED, value)
         }
         get() {
@@ -70,4 +72,15 @@ class FactsViewModel(
             })
         )
     }
+
+    fun deleteFactFromFavorites(factLocalModel: FactLocalModel) {
+        addDisposable(factsRepository.deleteFactFromFavorites(factLocalModel)
+            .subscribe({
+                _deleteFavoriteFactMLD.setSuccess(factLocalModel.factId)
+            }, {
+                _deleteFavoriteFactMLD.setError()
+            })
+        )
+    }
+
 }
