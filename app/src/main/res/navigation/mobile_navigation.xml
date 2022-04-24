@@ -9,12 +9,12 @@
         android:id="@+id/navigation_home"
         android:name="br.fabiorachid.catfact.view.ui.home.HomeFragment"
         android:label="@string/home_title"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/home_fragment" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="br.fabiorachid.catfact.view.ui.favorites.FavoritesFragment"
         android:label="@string/favorites_title"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/favorites_fragment" />
 
 </navigation>

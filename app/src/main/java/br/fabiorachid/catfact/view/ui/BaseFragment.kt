@@ -8,11 +8,12 @@ import br.fabiorachid.catfact.utils.showSnackbar
 open class BaseFragment : Fragment() {
 
     protected fun showNetworkError(action: (() -> Unit)?, view: View?) {
-        showSnackbar(requireContext(), getString(R.string.network_error_text), action, view = view)
+        showSnackbar(requireContext(), getString(R.string.network_error), action, view = view)
     }
 
-    protected fun showGenericError(action: (() -> Unit)?, view: View?) {
-        showSnackbar(requireContext(), getString(R.string.generic_error_text), action, view = view)
+    protected fun showGenericError(action: (() -> Unit)?, errorMessage: String, view: View?) {
+        showSnackbar(requireContext(),
+            errorMessage.ifEmpty { getString(R.string.generic_error) }, action, view = view)
     }
 
 }

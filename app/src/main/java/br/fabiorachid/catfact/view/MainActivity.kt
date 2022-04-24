@@ -10,16 +10,17 @@ import androidx.navigation.ui.setupWithNavController
 import br.fabiorachid.catfact.R
 import br.fabiorachid.catfact.databinding.ActivityMainBinding
 import br.fabiorachid.catfact.viewmodel.FactsViewModel
+import org.koin.androidx.viewmodel.ext.android.getStateViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val factsViewModel: FactsViewModel by viewModel()
+    lateinit var factsViewModel: FactsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        factsViewModel = getStateViewModel()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

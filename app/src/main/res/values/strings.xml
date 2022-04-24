@@ -3,13 +3,14 @@
 
     <!-- Home -->
     <string name="home_title">Home</string>
+    <string name="home_add_favorite_success">Fact successfully saved to your favorites!</string>
 
     <!-- Favorites -->
     <string name="favorites_title">Favorites</string>
 
     <!-- Generic -->
-    <string name="network_error_text">Please check your internet connection or retry.</string>
-    <string name="generic_error_text">Oops! Something went wrong.</string>
+    <string name="network_error">Please check your internet connection or retry.</string>
+    <string name="generic_error">Oops! Something went wrong.</string>
     <string name="retry">Retry</string>
 
 

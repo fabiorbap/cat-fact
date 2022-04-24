@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -13,7 +14,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -59,7 +59,7 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:${rootProject.ext.roomVersion}"
     implementation "androidx.room:room-rxjava2:${rootProject.ext.roomVersion}"
-    annotationProcessor "androidx.room:room-compiler:${rootProject.ext.roomVersion}"
+    kapt "androidx.room:room-compiler:${rootProject.ext.roomVersion}"
 
     // Retrofit with RxJava2, Okhttp, Gson  */
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
