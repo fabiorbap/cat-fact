@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import br.fabiorachid.catfact.R
 import br.fabiorachid.catfact.databinding.FragmentHomeBinding
 import br.fabiorachid.catfact.model.data.remote.ResponseStatus
@@ -33,7 +32,10 @@ class HomeFragment : BaseFragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        getFact()
+        if (!factsViewModel.hasFactBeenLoaded) {
+            getFact()
+            factsViewModel.hasFactBeenLoaded = true
+        }
         return root
     }
 
@@ -68,7 +70,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun observeAddFactToFavoritesLiveData() {
-        factsViewModel.addFavoriteFactMLD.observe(viewLifecycleOwner) {
+        factsViewModel.addFavoriteFactLD.observe(viewLifecycleOwner) {
             when (it.status) {
                 ResponseStatus.LOADING -> {}
                 ResponseStatus.SUCCESS -> showSnackbar(
