@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.fabiorachid.catfact.R
-import br.fabiorachid.catfact.databinding.FragmentHomeBinding
+import br.fabiorachid.catfact.databinding.HomeFragmentBinding
 import br.fabiorachid.catfact.model.data.remote.ResponseStatus
 import br.fabiorachid.catfact.model.data.remote.app.error.Error
 import br.fabiorachid.catfact.model.data.remote.app.fact.FactAppModel
@@ -13,13 +13,14 @@ import br.fabiorachid.catfact.utils.ConnectionUtil
 import br.fabiorachid.catfact.utils.disable
 import br.fabiorachid.catfact.utils.enable
 import br.fabiorachid.catfact.utils.showSnackbar
+import br.fabiorachid.catfact.view.MainActivity
 import br.fabiorachid.catfact.view.ui.BaseFragment
 import br.fabiorachid.catfact.viewmodel.FactsViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment : BaseFragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: HomeFragmentBinding? = null
 
     private val binding get() = _binding!!
     private val factsViewModel: FactsViewModel by sharedViewModel()
@@ -30,13 +31,12 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        _binding = HomeFragmentBinding.inflate(inflater, container, false)
         if (!factsViewModel.hasFactBeenLoaded) {
             getFact()
             factsViewModel.hasFactBeenLoaded = true
         }
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,12 +76,13 @@ class HomeFragment : BaseFragment() {
                 ResponseStatus.SUCCESS -> showSnackbar(
                     requireContext(),
                     getString(R.string.home_add_favorite_success),
-                    view = _binding?.root
-                )
+                    view = _binding?.root,
+                    anchorView = (requireActivity() as? MainActivity)?.navView)
                 ResponseStatus.ERROR -> showSnackbar(
                     requireContext(),
                     getString(R.string.generic_error),
-                    view = _binding?.root
+                    view = _binding?.root,
+                    anchorView = (requireActivity() as? MainActivity)?.navView
                 )
             }
         }

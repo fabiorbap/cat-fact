@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.fabiorachid.catfact.databinding.FragmentFavoritesBinding
+import br.fabiorachid.catfact.databinding.FavoritesFragmentBinding
+import br.fabiorachid.catfact.utils.showSnackbar
+import br.fabiorachid.catfact.view.MainActivity
 import br.fabiorachid.catfact.view.ui.BaseFragment
 import br.fabiorachid.catfact.viewmodel.FactsViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class FavoritesFragment : BaseFragment() {
 
-    private var _binding: FragmentFavoritesBinding? = null
+    private var _binding: FavoritesFragmentBinding? = null
     private val factsViewModel: FactsViewModel by sharedViewModel()
 
     private val binding get() = _binding!!
@@ -22,10 +24,9 @@ class FavoritesFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        _binding = FavoritesFragmentBinding.inflate(inflater, container, false)
 
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,11 +37,11 @@ class FavoritesFragment : BaseFragment() {
 
     private fun observeLiveData() {
         factsViewModel.favoriteFactsLD.observe(viewLifecycleOwner) {
-            var favorites = ""
-            for (favorite in it.data ?: arrayListOf()) {
-                favorites += "${favorite.fact} "
+            _binding?.favoriteItem?.text = it?.data?.get(it.data.size - 1)?.fact ?: ""
+            _binding?.favoriteItem?.onRemoveClick = {
+                showSnackbar(requireContext(), it?.data?.get(it.data.size - 1)?.fact ?: "", view = _binding?.root,
+                anchorView = (requireActivity() as? MainActivity)?.navView)
             }
-            _binding?.textFavorites?.text = favorites
         }
     }
 
