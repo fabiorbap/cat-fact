@@ -12,7 +12,7 @@
         tools:layout="@layout/home_fragment" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_favorites"
         android:name="br.fabiorachid.catfact.view.ui.favorites.FavoritesFragment"
         android:label="@string/favorites_title"
         tools:layout="@layout/favorites_fragment" />

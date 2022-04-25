@@ -4,4 +4,5 @@
     android:id="@+id/rcvFavoritesList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.favorites.FavoritesFragment"/>
+    tools:context=".view.ui.favorites.FavoritesFragment"
+    android:layout_marginBottom="@dimen/bottom_navigation_height"/>

@@ -1,11 +1,20 @@
 package br.fabiorachid.catfact.utils
 
-import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageButton
+import androidx.appcompat.widget.AppCompatToggleButton
 
-fun AppCompatButton.enable() {
+fun AppCompatImageButton.enable() {
     isEnabled = true
 }
 
-fun AppCompatButton.disable() {
+fun AppCompatImageButton.disable() {
+    isEnabled = false
+}
+
+fun AppCompatToggleButton.enable() {
+    isEnabled = true
+}
+
+fun AppCompatToggleButton.disable() {
     isEnabled = false
 }

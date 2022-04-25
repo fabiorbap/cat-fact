@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import br.fabiorachid.catfact.R
 import br.fabiorachid.catfact.databinding.HomeFragmentBinding
+import br.fabiorachid.catfact.model.data.local.FactLocalModel
 import br.fabiorachid.catfact.model.data.remote.ResponseStatus
 import br.fabiorachid.catfact.model.data.remote.app.error.Error
 import br.fabiorachid.catfact.model.data.remote.app.fact.FactAppModel
@@ -24,6 +25,9 @@ class HomeFragment : BaseFragment() {
 
     private val binding get() = _binding!!
     private val factsViewModel: FactsViewModel by sharedViewModel()
+    private val currentFact
+        get() = _binding?.tvwFact?.text?.toString() ?: ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,10 +36,7 @@ class HomeFragment : BaseFragment() {
     ): View {
 
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
-        if (!factsViewModel.hasFactBeenLoaded) {
-            getFact()
-            factsViewModel.hasFactBeenLoaded = true
-        }
+        shouldLoadNewFact()
         return binding.root
     }
 
@@ -46,17 +47,65 @@ class HomeFragment : BaseFragment() {
         observeLiveData()
     }
 
+    private fun shouldLoadNewFact() {
+        if (!factsViewModel.hasFactBeenLoaded) {
+            getFact()
+            factsViewModel.hasFactBeenLoaded = true
+            factsViewModel.isFactOnFavorites(currentFact)
+        }
+    }
+
     private fun getFact() {
         factsViewModel.getFact()
     }
 
     private fun addFactToFavorites() {
-        factsViewModel.addFactToFavorites(_binding?.textHome?.text.toString())
+        factsViewModel.addFactToFavorites(currentFact)
     }
 
     private fun observeLiveData() {
         observeGetFactLiveData()
         observeAddFactToFavoritesLiveData()
+        observeIsFactOnFavoritesLiveData()
+        observeFactOnFavorites()
+        observeOnDeleteFact()
+    }
+
+    private fun observeOnDeleteFact() {
+        factsViewModel.deleteFavoriteFactLD.observe(viewLifecycleOwner) {
+            when (it.status) {
+                ResponseStatus.LOADING -> {}
+                ResponseStatus.SUCCESS -> onDeleteFavoriteSuccess()
+                ResponseStatus.ERROR -> onDeleteFavoriteError()
+            }
+        }
+    }
+
+    private fun onDeleteFavoriteSuccess() {
+        showSnackbar(
+            requireContext(), getString(R.string.favorites_delete_fact_success),
+            view = _binding?.root, anchorView = (requireActivity() as MainActivity).navView
+        )
+    }
+
+    private fun onDeleteFavoriteError() {
+        showSnackbar(
+            requireContext(), getString(R.string.favorites_delete_fact_error),
+            view = _binding?.root, anchorView = (requireActivity() as MainActivity).navView
+        )
+    }
+
+    private fun observeFactOnFavorites() {
+        factsViewModel.factFromFavoritesLD.observe(viewLifecycleOwner) {
+            deleteFromFavorites(it)
+        }
+    }
+
+    private fun observeIsFactOnFavoritesLiveData() {
+        factsViewModel.isFactOnFavoritesLD.observe(viewLifecycleOwner) {
+            if (it) _binding?.btnAddFact?.toggleOn()
+            else _binding?.btnAddFact?.toggleOff()
+        }
     }
 
     private fun observeGetFactLiveData() {
@@ -77,7 +126,8 @@ class HomeFragment : BaseFragment() {
                     requireContext(),
                     getString(R.string.home_add_favorite_success),
                     view = _binding?.root,
-                    anchorView = (requireActivity() as? MainActivity)?.navView)
+                    anchorView = (requireActivity() as? MainActivity)?.navView
+                )
                 ResponseStatus.ERROR -> showSnackbar(
                     requireContext(),
                     getString(R.string.generic_error),
@@ -96,7 +146,8 @@ class HomeFragment : BaseFragment() {
 
     private fun onAddFactToFavoritesButtonClick() {
         _binding?.btnAddFact?.setOnClickListener {
-            addFactToFavorites()
+            if (_binding?.btnAddFact?.isChecked == false) factsViewModel.getFavoriteFact(currentFact)
+            else addFactToFavorites()
         }
     }
 
@@ -105,8 +156,9 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun onGetFactSuccess(it: FactAppModel?) {
-        _binding?.textHome?.text = it?.fact
+        _binding?.tvwFact?.text = it?.fact
         _binding?.btnFact?.enable()
+        factsViewModel.isFactOnFavorites(it?.fact ?: "")
     }
 
     private fun onGetFactError(error: Error?) {
@@ -116,7 +168,10 @@ class HomeFragment : BaseFragment() {
             _binding?.root
         )
         else showGenericError(this::getFact, error?.errorMessage ?: "", _binding?.root)
+    }
 
+    private fun deleteFromFavorites(factLocalModel: FactLocalModel) {
+        factsViewModel.deleteFactFromFavorites(factLocalModel ?: FactLocalModel(0, ""))
     }
 
     override fun onDestroyView() {

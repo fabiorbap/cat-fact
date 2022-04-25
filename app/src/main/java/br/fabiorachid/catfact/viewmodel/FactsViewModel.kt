@@ -20,6 +20,7 @@ class FactsViewModel(
 
     companion object {
         private const val HAS_FACT_BEEN_LOADED = "hasFactBeenLoaded"
+        private const val IS_FACT_FAVORITE = "isFactFavorite"
     }
 
     private val _factMLD = MutableLiveData<Response<FactAppModel>>()
@@ -34,14 +35,18 @@ class FactsViewModel(
     private val _deleteFavoriteFactMLD = SingleLiveEvent<Response<Int>>()
     val deleteFavoriteFactLD: SingleLiveEvent<Response<Int>> = _deleteFavoriteFactMLD
 
+    private val _isFactOnFavoritesMLD = MutableLiveData<Boolean>()
+    val isFactOnFavoritesLD: LiveData<Boolean> = _isFactOnFavoritesMLD
+
+    private val _factFromFavoritesMLD = SingleLiveEvent<FactLocalModel>()
+    val factFromFavoritesLD: SingleLiveEvent<FactLocalModel> = _factFromFavoritesMLD
+
     var hasFactBeenLoaded: Boolean = false
         set(value) {
             field = value
             savedState.set(HAS_FACT_BEEN_LOADED, value)
         }
-        get() {
-            return savedState.get<Boolean>(HAS_FACT_BEEN_LOADED) ?: false
-        }
+        get() = savedState.get<Boolean>(HAS_FACT_BEEN_LOADED) ?: false
 
     fun getFact() {
         addDisposable(factsRepository.getFact()
@@ -54,32 +59,58 @@ class FactsViewModel(
     }
 
     fun addFactToFavorites(fact: String) {
-        addDisposable(factsRepository.addFactToFavorites(fact)
-            .subscribe({
-                _addFavoriteFactMLD.setSuccess()
-            }, {
-                _addFavoriteFactMLD.setError()
-            })
+        addDisposable(
+            factsRepository.addFactToFavorites(fact)
+                .subscribe({
+                    _addFavoriteFactMLD.setSuccess()
+                }, {
+                    _addFavoriteFactMLD.setError()
+                })
         )
     }
 
     fun getFavoriteFacts() {
-        addDisposable(factsRepository.getFavoriteFacts()
-            .subscribe({
-                _favoriteFactsMLD.setSuccess(it)
-            }, {
-                _favoriteFactsMLD.setError()
-            })
+        addDisposable(
+            factsRepository.getFavoriteFacts()
+                .subscribe({
+                    _favoriteFactsMLD.setSuccess(it)
+                }, {
+                    _favoriteFactsMLD.setError()
+                })
         )
     }
 
     fun deleteFactFromFavorites(factLocalModel: FactLocalModel) {
-        addDisposable(factsRepository.deleteFactFromFavorites(factLocalModel)
-            .subscribe({
-                _deleteFavoriteFactMLD.setSuccess(factLocalModel.factId)
-            }, {
-                _deleteFavoriteFactMLD.setError()
-            })
+        addDisposable(
+            factsRepository.deleteFactFromFavorites(factLocalModel)
+                .subscribe({
+                    _deleteFavoriteFactMLD.setSuccess(factLocalModel.factId)
+                }, {
+                    _deleteFavoriteFactMLD.setError()
+                })
+        )
+    }
+
+    fun isFactOnFavorites(fact: String) {
+        addDisposable(
+            factsRepository.getFavoriteFacts()
+                .subscribe({
+                    _isFactOnFavoritesMLD.postValue(it.any { factModel -> factModel.fact == fact })
+                }, {
+                    _isFactOnFavoritesMLD.postValue(false)
+                })
+        )
+    }
+
+    fun getFavoriteFact(fact: String) {
+        addDisposable(
+            factsRepository.getFavoriteFacts()
+                .subscribe({
+                    val favoriteFact = it.find { factModel -> factModel.fact == fact }
+                    _factFromFavoritesMLD.postValue(favoriteFact ?: FactLocalModel(0, ""))
+                }, {
+                    _factFromFavoritesMLD.postValue(FactLocalModel(0, ""))
+                })
         )
     }
 

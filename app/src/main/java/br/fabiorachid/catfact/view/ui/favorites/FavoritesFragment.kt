@@ -58,7 +58,7 @@ class FavoritesFragment : BaseFragment() {
 
     private fun observeDeleteFactLiveData() {
         factsViewModel.deleteFavoriteFactLD.observe(viewLifecycleOwner) {
-            when(it.status) {
+            when (it.status) {
                 ResponseStatus.LOADING -> {}
                 ResponseStatus.SUCCESS -> onDeleteFavoriteSuccess(it.data)
                 ResponseStatus.ERROR -> onDeleteFavoriteError()
@@ -69,13 +69,18 @@ class FavoritesFragment : BaseFragment() {
     private fun onDeleteFavoriteSuccess(id: Int?) {
         favoritesList.removeIf { favorite -> favorite.factId == id }
         adapter.notifyDataSetChanged()
-        showSnackbar(requireContext(), getString(R.string.favorites_delete_fact_success),
-            view = _binding?.root, anchorView = (requireActivity() as MainActivity).navView)
+        showSnackbar(
+            requireContext(), getString(R.string.favorites_delete_fact_success),
+            view = _binding?.root, anchorView = (requireActivity() as MainActivity).navView
+        )
     }
 
     private fun onDeleteFavoriteError() {
-        showSnackbar(requireContext(), getString(R.string.favorites_delete_fact_error),
-            view = _binding?.root, anchorView = (requireActivity() as MainActivity).navView)    }
+        showSnackbar(
+            requireContext(), getString(R.string.favorites_delete_fact_error),
+            view = _binding?.root, anchorView = (requireActivity() as MainActivity).navView
+        )
+    }
 
     private fun setupAdapter() {
         adapter = FavoritesAdapter(favoritesList, this::onRemoveClick)

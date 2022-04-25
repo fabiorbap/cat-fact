@@ -11,7 +11,6 @@ import br.fabiorachid.catfact.R
 import br.fabiorachid.catfact.databinding.MainActivityBinding
 import br.fabiorachid.catfact.viewmodel.FactsViewModel
 import org.koin.androidx.viewmodel.ext.android.getStateViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         factsViewModel = getStateViewModel()
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar?.hide()
         navView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard
+                R.id.navigation_home, R.id.navigation_favorites
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

@@ -2,8 +2,10 @@
     <string name="app_name">Cat Fact</string>
 
     <!-- Home -->
-    <string name="home_title">Home</string>
+    <string name="home_title">Cat Facts</string>
     <string name="home_add_favorite_success">Fact successfully saved to your favorites!</string>
+    <string name="home_get_fact">Get fact</string>
+    <string name="home_add_fact_to_favorites">Add fact to favorites</string>
 
     <!-- Favorites -->
     <string name="favorites_title">Favorites</string>
@@ -14,6 +16,7 @@
     <string name="network_error">Please check your internet connection or retry.</string>
     <string name="generic_error">Oops! Something went wrong.</string>
     <string name="retry">Retry</string>
+
 
 
 </resources>
