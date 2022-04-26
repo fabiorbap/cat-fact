@@ -3,6 +3,8 @@ package br.fabiorachid.catfact.view.ui.favorites
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.fabiorachid.catfact.R
@@ -49,10 +51,17 @@ class FavoritesFragment : BaseFragment() {
 
     private fun observeFavoriteFactsLiveData() {
         factsViewModel.favoriteFactsLD.observe(viewLifecycleOwner) {
-            favoritesList.clear()
-            //From most recent to oldest favorite
-            favoritesList.addAll(it.data?.reversed() ?: listOf())
-            adapter.notifyDataSetChanged()
+            if (it?.data?.isEmpty() == true) {
+                hideList()
+                return@observe
+            }
+            else {
+                showList()
+                favoritesList.clear()
+                //From most recent to oldest favorite
+                favoritesList.addAll(it.data?.reversed() ?: listOf())
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 
@@ -74,6 +83,7 @@ class FavoritesFragment : BaseFragment() {
             requireContext(), getString(R.string.favorites_delete_fact_success),
             view = _binding?.root, anchorView = (requireActivity() as MainActivity).navView
         )
+        if (favoritesList.isEmpty()) hideList()
     }
 
     private fun onDeleteFavoriteError() {
@@ -97,6 +107,16 @@ class FavoritesFragment : BaseFragment() {
     private fun onRemoveClick(id: Int) {
         val favorite = favoritesList.find { favorite -> favorite.factId == id }
         factsViewModel.deleteFactFromFavorites(favorite ?: FactLocalModel(0, ""))
+    }
+
+    private fun showList() {
+        _binding?.rcvFavoritesList?.visibility = VISIBLE
+        _binding?.tvwEmptyList?.visibility = GONE
+    }
+
+    private fun hideList() {
+        _binding?.rcvFavoritesList?.visibility = GONE
+        _binding?.tvwEmptyList?.visibility = VISIBLE
     }
 
     override fun onDestroyView() {

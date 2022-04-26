@@ -11,6 +11,7 @@
     <string name="favorites_title">Favorites</string>
     <string name="favorites_delete_fact_success">Fact removed from favorites.</string>
     <string name="favorites_delete_fact_error">Could not remove fact from favorites, please retry</string>
+    <string name="favorites_empty">You do not have any favorite facts!</string>
 
     <!-- Generic -->
     <string name="network_error">Please check your internet connection or retry.</string>

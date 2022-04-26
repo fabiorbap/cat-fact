@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rcvFavoritesList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.favorites.FavoritesFragment"
-    android:layout_marginBottom="@dimen/bottom_navigation_height"
-    android:padding="@dimen/text_large"
-    android:clipToPadding="false"
-    android:background="@color/default_gray"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvwEmptyList"
+        style="@style/BaseTextStyle.Body1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white"
+        android:text="@string/favorites_empty"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvFavoritesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.ui.favorites.FavoritesFragment"
+        android:layout_marginBottom="@dimen/bottom_navigation_height"
+        android:padding="@dimen/text_large"
+        android:clipToPadding="false"
+        android:background="@color/default_gray"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
