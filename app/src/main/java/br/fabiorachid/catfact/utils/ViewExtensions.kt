@@ -1,6 +1,9 @@
 package br.fabiorachid.catfact.utils
 
+import android.os.Build
+import android.text.Html
 import androidx.appcompat.widget.AppCompatImageButton
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.AppCompatToggleButton
 
 fun AppCompatImageButton.enable() {
@@ -17,4 +20,8 @@ fun AppCompatToggleButton.enable() {
 
 fun AppCompatToggleButton.disable() {
     isEnabled = false
+}
+
+fun AppCompatTextView.setHtmlText(text: String) {
+    this.text = Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
 }

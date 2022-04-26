@@ -20,11 +20,11 @@ class FactsViewModel(
 
     companion object {
         private const val HAS_FACT_BEEN_LOADED = "hasFactBeenLoaded"
-        private const val IS_FACT_FAVORITE = "isFactFavorite"
+        private const val LOADED_FACT = "loadedFact"
     }
 
-    private val _factMLD = MutableLiveData<Response<FactAppModel>>()
-    val factLD: LiveData<Response<FactAppModel>> = _factMLD
+    private val _factMLD = SingleLiveEvent<Response<FactAppModel>>()
+    val factLD: SingleLiveEvent<Response<FactAppModel>> = _factMLD
 
     private val _favoriteFactsMLD = MutableLiveData<Response<List<FactLocalModel>>>()
     val favoriteFactsLD: LiveData<Response<List<FactLocalModel>>> = _favoriteFactsMLD
@@ -47,6 +47,13 @@ class FactsViewModel(
             savedState.set(HAS_FACT_BEEN_LOADED, value)
         }
         get() = savedState.get<Boolean>(HAS_FACT_BEEN_LOADED) ?: false
+
+    var loadedFact: String = ""
+        set(value) {
+            field = value
+            savedState.set(LOADED_FACT, value)
+        }
+    get() = savedState.get<String>(LOADED_FACT) ?: ""
 
     fun getFact() {
         addDisposable(factsRepository.getFact()

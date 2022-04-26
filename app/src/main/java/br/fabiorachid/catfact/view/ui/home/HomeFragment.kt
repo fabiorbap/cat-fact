@@ -10,10 +10,7 @@ import br.fabiorachid.catfact.model.data.local.FactLocalModel
 import br.fabiorachid.catfact.model.data.remote.ResponseStatus
 import br.fabiorachid.catfact.model.data.remote.app.error.Error
 import br.fabiorachid.catfact.model.data.remote.app.fact.FactAppModel
-import br.fabiorachid.catfact.utils.ConnectionUtil
-import br.fabiorachid.catfact.utils.disable
-import br.fabiorachid.catfact.utils.enable
-import br.fabiorachid.catfact.utils.showSnackbar
+import br.fabiorachid.catfact.utils.*
 import br.fabiorachid.catfact.view.MainActivity
 import br.fabiorachid.catfact.view.ui.BaseFragment
 import br.fabiorachid.catfact.viewmodel.FactsViewModel
@@ -36,7 +33,8 @@ class HomeFragment : BaseFragment() {
     ): View {
 
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
-        shouldLoadNewFact()
+        restoreSavedState()
+        factsViewModel.isFactOnFavorites(currentFact)
         return binding.root
     }
 
@@ -47,12 +45,11 @@ class HomeFragment : BaseFragment() {
         observeLiveData()
     }
 
-    private fun shouldLoadNewFact() {
+    private fun restoreSavedState() {
         if (!factsViewModel.hasFactBeenLoaded) {
             getFact()
             factsViewModel.hasFactBeenLoaded = true
-            factsViewModel.isFactOnFavorites(currentFact)
-        }
+        } else _binding?.tvwFact?.setHtmlText(factsViewModel.loadedFact)
     }
 
     private fun getFact() {
@@ -155,7 +152,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun onGetFactSuccess(it: FactAppModel?) {
-        _binding?.tvwFact?.text = it?.fact
+        _binding?.tvwFact?.setHtmlText(it?.fact ?: "")
         factsViewModel.isFactOnFavorites(it?.fact ?: "")
     }
 
@@ -165,6 +162,11 @@ class HomeFragment : BaseFragment() {
             _binding?.root
         )
         else showGenericError(this::getFact, error?.errorMessage ?: "", _binding?.root)
+    }
+
+    override fun onPause() {
+        if (_binding?.tvwFact?.text?.isNotEmpty() == true) factsViewModel.loadedFact = _binding?.tvwFact?.text.toString()
+        super.onPause()
     }
 
     private fun deleteFromFavorites(factLocalModel: FactLocalModel) {
