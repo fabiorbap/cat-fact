@@ -3,11 +3,11 @@ package br.fabiorachid.catfact.view.components
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.constraintlayout.widget.ConstraintLayout
 import br.fabiorachid.catfact.databinding.FavoriteItemComponentBinding
+import com.google.android.material.card.MaterialCardView
 
 class FavoriteItemComponent @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr) {
+) : MaterialCardView(context, attrs, defStyleAttr) {
 
     private var binding: FavoriteItemComponentBinding
     var text: String = ""
@@ -19,7 +19,13 @@ class FavoriteItemComponent @JvmOverloads constructor(context: Context, attrs: A
     var onRemoveClick: () -> Unit = {}
         set(value) {
             field = value
-            binding.imgBtnRemove.setOnClickListener { value.invoke() }
+            binding.btnRemove.setOnClickListener { value.invoke() }
+        }
+
+    var removeButtonText: String = ""
+        set(value) {
+            field = value
+            binding.btnRemove.text = value
         }
 
     init {

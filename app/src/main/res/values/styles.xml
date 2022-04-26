@@ -9,8 +9,12 @@
         <item name="android:textAlignment">center</item>
     </style>
 
-    <style name="BaseTextStyle.Body">
+    <style name="BaseTextStyle.Body1">
         <item name="android:textSize">@dimen/text_large</item>
+    </style>
+
+    <style name="BaseTextStyle.Body2">
+        <item name="android:textSize">@dimen/text_medium</item>
     </style>
 
     <style name="BaseButton">
@@ -23,6 +27,16 @@
         <item name="android:layout_width">@dimen/icon_button_dimensions</item>
         <item name="android:layout_height">@dimen/icon_button_dimensions</item>
         <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="BaseButton.TextButton">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:textColor">@color/pink_dark</item>
+        <item name="android:paddingRight">@dimen/margin_large</item>
+        <item name="android:paddingTop">@dimen/margin_large</item>
     </style>
 
 </resources>

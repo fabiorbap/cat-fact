@@ -67,8 +67,9 @@ class FavoritesFragment : BaseFragment() {
     }
 
     private fun onDeleteFavoriteSuccess(id: Int?) {
+        val position = favoritesList.indexOfFirst {favorite -> favorite.factId == id }
         favoritesList.removeIf { favorite -> favorite.factId == id }
-        adapter.notifyDataSetChanged()
+        adapter.notifyItemRemoved(position)
         showSnackbar(
             requireContext(), getString(R.string.favorites_delete_fact_success),
             view = _binding?.root, anchorView = (requireActivity() as MainActivity).navView
@@ -90,6 +91,7 @@ class FavoritesFragment : BaseFragment() {
         setupAdapter()
         _binding?.rcvFavoritesList?.adapter = adapter
         _binding?.rcvFavoritesList?.layoutManager = LinearLayoutManager(requireContext())
+        _binding?.rcvFavoritesList?.addItemDecoration(VerticalSpacingDecoration(resources.getDimension(R.dimen.margin_medium).toInt()))
     }
 
     private fun onRemoveClick(id: Int) {

@@ -16,6 +16,6 @@
     <color name="deep_orange_dark">#c75b39</color>
     <color name="orange">#fff3e0</color>
 
-    <color name="background_color">@color/orange</color>
+    <color name="default_gray">#fafafa</color>
 
 </resources>

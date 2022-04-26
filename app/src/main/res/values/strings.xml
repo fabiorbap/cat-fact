@@ -16,6 +16,7 @@
     <string name="network_error">Please check your internet connection or retry.</string>
     <string name="generic_error">Oops! Something went wrong.</string>
     <string name="retry">Retry</string>
+    <string name="remove">Remove</string>
 
 
 

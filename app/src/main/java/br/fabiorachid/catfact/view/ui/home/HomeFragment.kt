@@ -152,17 +152,14 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun onGetFactLoading() {
-        _binding?.btnFact?.disable()
     }
 
     private fun onGetFactSuccess(it: FactAppModel?) {
         _binding?.tvwFact?.text = it?.fact
-        _binding?.btnFact?.enable()
         factsViewModel.isFactOnFavorites(it?.fact ?: "")
     }
 
     private fun onGetFactError(error: Error?) {
-        _binding?.btnFact?.enable()
         if (!ConnectionUtil.isOnline(requireContext())) showNetworkError(
             this::getFact,
             _binding?.root
@@ -171,7 +168,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun deleteFromFavorites(factLocalModel: FactLocalModel) {
-        factsViewModel.deleteFactFromFavorites(factLocalModel ?: FactLocalModel(0, ""))
+        factsViewModel.deleteFactFromFavorites(factLocalModel)
     }
 
     override fun onDestroyView() {

@@ -5,4 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.ui.favorites.FavoritesFragment"
-    android:layout_marginBottom="@dimen/bottom_navigation_height"/>
+    android:layout_marginBottom="@dimen/bottom_navigation_height"
+    android:padding="@dimen/text_large"
+    android:clipToPadding="false"
+    android:background="@color/default_gray"/>
