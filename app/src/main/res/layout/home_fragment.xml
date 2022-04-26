@@ -63,6 +63,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgCatLogo"
         app:layout_constraintVertical_bias="0.9"
-        android:tint="@android:color/holo_red_dark"/>
+        android:tint="@color/favorite_red" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

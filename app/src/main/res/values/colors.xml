@@ -16,6 +16,7 @@
     <color name="deep_orange_light">#ffbb93</color>
     <color name="deep_orange_dark">#c75b39</color>
     <color name="orange">#fff3e0</color>
+    <color name="favorite_red">@android:color/holo_red_dark</color>
 
     <color name="default_gray">#fafafa</color>
 
