@@ -1,17 +1,30 @@
 <resources>
-    <string name="app_name">Cat Fact</string>
+    <string name="app_name">Cat Facts</string>
 
     <!-- Home -->
-    <string name="home_title">Home</string>
+    <string name="home_title">Cat Facts</string>
     <string name="home_add_favorite_success">Fact successfully saved to your favorites!</string>
+    <string name="home_get_fact">Get fact</string>
+    <string name="home_add_fact_to_favorites">Add fact to favorites</string>
 
     <!-- Favorites -->
     <string name="favorites_title">Favorites</string>
+    <string name="favorites_delete_fact_success">Fact removed from favorites.</string>
+    <string name="favorites_delete_fact_error">Could not remove fact from favorites, please retry</string>
+    <string name="favorites_empty">You do not have any favorite facts!</string>
+    <string name="favorites_remove_confirmation">Are you sure you want to remove this fact from your favorites?</string>
+    <string name="favorites_save_error">There is no fact to save to favorites.</string>
 
     <!-- Generic -->
     <string name="network_error">Please check your internet connection or retry.</string>
     <string name="generic_error">Oops! Something went wrong.</string>
     <string name="retry">Retry</string>
-
+    <string name="remove">Remove</string>
+    <string name="cancel">Cancel</string>
+    <string name="share_to">Share to:</string>
+    <string name="share_no_apps_found">No app was found for sharing.</string>
+    <string name="share">Share</string>
+    <string name="share_message">Did you know that:\n\n%s\n\nWant to know more about cats? Look for \"Cat Facts\" in the Play Store!</string>
+    <string name="share_message_error">There is no fact to be shared.</string>
 
 </resources>

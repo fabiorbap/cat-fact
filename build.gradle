@@ -31,4 +31,5 @@ ext {
     okHttpLoggingVersion = '3.10.0'
     koinVersion = '3.2.0-beta-1'
     rxJava2Version = '2.1.0'
+    lottieVersion = '5.0.3'
 }

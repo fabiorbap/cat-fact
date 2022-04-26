@@ -76,4 +76,8 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-navigation:$koinVersion"
     implementation "io.insert-koin:koin-androidx-compose:$koinVersion"
 
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+
 }

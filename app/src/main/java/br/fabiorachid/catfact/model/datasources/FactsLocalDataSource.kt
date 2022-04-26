@@ -11,4 +11,6 @@ interface FactsLocalDataSource {
 
     fun getFavoriteFacts(): Single<List<FactLocalModel>>
 
+    fun deleteFactFromFavorites(factLocalModel: FactLocalModel): Completable
+
 }

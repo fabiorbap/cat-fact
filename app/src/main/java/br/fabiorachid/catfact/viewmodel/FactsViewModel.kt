@@ -20,10 +20,11 @@ class FactsViewModel(
 
     companion object {
         private const val HAS_FACT_BEEN_LOADED = "hasFactBeenLoaded"
+        private const val LOADED_FACT = "loadedFact"
     }
 
-    private val _factMLD = MutableLiveData<Response<FactAppModel>>()
-    val factLD: LiveData<Response<FactAppModel>> = _factMLD
+    private val _factMLD = SingleLiveEvent<Response<FactAppModel>>()
+    val factLD: SingleLiveEvent<Response<FactAppModel>> = _factMLD
 
     private val _favoriteFactsMLD = MutableLiveData<Response<List<FactLocalModel>>>()
     val favoriteFactsLD: LiveData<Response<List<FactLocalModel>>> = _favoriteFactsMLD
@@ -31,15 +32,28 @@ class FactsViewModel(
     private val _addFavoriteFactMLD = SingleLiveEvent<Response<Nothing>>()
     val addFavoriteFactLD: SingleLiveEvent<Response<Nothing>> = _addFavoriteFactMLD
 
+    private val _deleteFavoriteFactMLD = SingleLiveEvent<Response<Int>>()
+    val deleteFavoriteFactLD: SingleLiveEvent<Response<Int>> = _deleteFavoriteFactMLD
+
+    private val _isFactOnFavoritesMLD = MutableLiveData<Boolean>()
+    val isFactOnFavoritesLD: LiveData<Boolean> = _isFactOnFavoritesMLD
+
+    private val _factFromFavoritesMLD = SingleLiveEvent<FactLocalModel>()
+    val factFromFavoritesLD: SingleLiveEvent<FactLocalModel> = _factFromFavoritesMLD
+
     var hasFactBeenLoaded: Boolean = false
         set(value) {
             field = value
-            // Simply update the savedState every time your saved property changes
             savedState.set(HAS_FACT_BEEN_LOADED, value)
         }
-        get() {
-            return savedState.get<Boolean>(HAS_FACT_BEEN_LOADED) ?: false
+        get() = savedState.get<Boolean>(HAS_FACT_BEEN_LOADED) ?: false
+
+    var loadedFact: String = ""
+        set(value) {
+            field = value
+            savedState.set(LOADED_FACT, value)
         }
+    get() = savedState.get<String>(LOADED_FACT) ?: ""
 
     fun getFact() {
         addDisposable(factsRepository.getFact()
@@ -52,22 +66,59 @@ class FactsViewModel(
     }
 
     fun addFactToFavorites(fact: String) {
-        addDisposable(factsRepository.addFactToFavorites(fact)
-            .subscribe({
-                _addFavoriteFactMLD.setSuccess()
-            }, {
-                _addFavoriteFactMLD.setError()
-            })
+        addDisposable(
+            factsRepository.addFactToFavorites(fact)
+                .subscribe({
+                    _addFavoriteFactMLD.setSuccess()
+                }, {
+                    _addFavoriteFactMLD.setError()
+                })
         )
     }
 
     fun getFavoriteFacts() {
-        addDisposable(factsRepository.getFavoriteFacts()
-            .subscribe({
-                _favoriteFactsMLD.setSuccess(it)
-            }, {
-                _favoriteFactsMLD.setError()
-            })
+        addDisposable(
+            factsRepository.getFavoriteFacts()
+                .subscribe({
+                    _favoriteFactsMLD.setSuccess(it)
+                }, {
+                    _favoriteFactsMLD.setError()
+                })
         )
     }
+
+    fun deleteFactFromFavorites(factLocalModel: FactLocalModel) {
+        addDisposable(
+            factsRepository.deleteFactFromFavorites(factLocalModel)
+                .subscribe({
+                    _deleteFavoriteFactMLD.setSuccess(factLocalModel.factId)
+                }, {
+                    _deleteFavoriteFactMLD.setError()
+                })
+        )
+    }
+
+    fun isFactOnFavorites(fact: String) {
+        addDisposable(
+            factsRepository.getFavoriteFacts()
+                .subscribe({
+                    _isFactOnFavoritesMLD.postValue(it.any { factModel -> factModel.fact == fact })
+                }, {
+                    _isFactOnFavoritesMLD.postValue(false)
+                })
+        )
+    }
+
+    fun getFavoriteFact(fact: String) {
+        addDisposable(
+            factsRepository.getFavoriteFacts()
+                .subscribe({
+                    val favoriteFact = it.find { factModel -> factModel.fact == fact }
+                    _factFromFavoritesMLD.postValue(favoriteFact ?: FactLocalModel(0, ""))
+                }, {
+                    _factFromFavoritesMLD.postValue(FactLocalModel(0, ""))
+                })
+        )
+    }
+
 }

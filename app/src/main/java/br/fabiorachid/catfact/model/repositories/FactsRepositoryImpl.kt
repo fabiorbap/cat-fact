@@ -10,8 +10,10 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class FactsRepositoryImpl(private val factsLocalDataSource: FactsLocalDataSource,
-                          private val factsRemoteDataSource: FactsRemoteDataSource): FactsRepository {
+class FactsRepositoryImpl(
+    private val factsLocalDataSource: FactsLocalDataSource,
+    private val factsRemoteDataSource: FactsRemoteDataSource
+) : FactsRepository {
 
     override fun getFact(): Single<FactAppModel> {
         return factsRemoteDataSource.getFact()
@@ -30,5 +32,11 @@ class FactsRepositoryImpl(private val factsLocalDataSource: FactsLocalDataSource
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
+    }
+
+    override fun deleteFactFromFavorites(factLocalModel: FactLocalModel): Completable {
+        return factsLocalDataSource.deleteFactFromFavorites(factLocalModel)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
     }
 }
