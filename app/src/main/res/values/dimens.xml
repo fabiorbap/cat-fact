@@ -21,4 +21,8 @@
     <!-- Bottom navigation -->
     <dimen name="bottom_navigation_height">56dp</dimen>
 
+    <!-- Animations -->
+    <dimen name="cat_loading_width">150dp</dimen>
+    <dimen name="cat_loading_height">88dp</dimen>
+
 </resources>

@@ -3,6 +3,8 @@ package br.fabiorachid.catfact.view.ui.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import br.fabiorachid.catfact.R
 import br.fabiorachid.catfact.databinding.HomeFragmentBinding
@@ -149,14 +151,17 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun onGetFactLoading() {
+        showLoading()
     }
 
     private fun onGetFactSuccess(it: FactAppModel?) {
+        hideLoading()
         _binding?.tvwFact?.setHtmlText(it?.fact ?: "")
         factsViewModel.isFactOnFavorites(it?.fact ?: "")
     }
 
     private fun onGetFactError(error: Error?) {
+        hideLoading()
         if (!ConnectionUtil.isOnline(requireContext())) showNetworkError(
             this::getFact,
             _binding?.root
@@ -171,6 +176,26 @@ class HomeFragment : BaseFragment() {
 
     private fun deleteFromFavorites(factLocalModel: FactLocalModel) {
         factsViewModel.deleteFactFromFavorites(factLocalModel)
+    }
+
+    private fun showLoading() {
+        startAnimation()
+        _binding?.tvwFact?.visibility = GONE
+    }
+
+    private fun hideLoading() {
+        _binding?.tvwFact?.visibility = VISIBLE
+        stopAnimation()
+    }
+
+    private fun startAnimation() {
+        _binding?.lottieLoading?.playAnimation()
+        _binding?.lottieLoading?.visibility = VISIBLE
+    }
+
+    private fun stopAnimation() {
+        _binding?.lottieLoading?.pauseAnimation()
+        _binding?.lottieLoading?.visibility = GONE
     }
 
     override fun onDestroyView() {
