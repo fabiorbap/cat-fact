@@ -44,6 +44,7 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         onFactButtonClick()
         onAddFactToFavoritesButtonClick()
+        onShareButtonClick()
         observeLiveData()
     }
 
@@ -145,8 +146,32 @@ class HomeFragment : BaseFragment() {
 
     private fun onAddFactToFavoritesButtonClick() {
         _binding?.btnAddFact?.setOnClickListener {
+            if (binding.tvwFact.text.isEmpty()) {
+                _binding?.btnAddFact?.setState(false)
+                showSnackbar(requireContext(), getString(R.string.favorites_save_error), view = _binding?.root,
+                    anchorView = (requireActivity() as MainActivity).navView)
+                return@setOnClickListener
+            }
             if (_binding?.btnAddFact?.isChecked == false) factsViewModel.getFavoriteFact(currentFact)
             else addFactToFavorites()
+        }
+    }
+
+    private fun onShareButtonClick() {
+        _binding?.btnShare?.setOnClickListener {
+            if (_binding?.tvwFact?.text?.isNotEmpty() == true) {
+                shareFact(
+                    requireContext(),
+                    getString(R.string.share_message, binding.tvwFact.text.toString())
+                )
+            } else {
+                showSnackbar(
+                    requireContext(),
+                    getString(R.string.share_message_error),
+                    view = _binding?.root,
+                    anchorView = (requireActivity() as MainActivity).navView
+                )
+            }
         }
     }
 

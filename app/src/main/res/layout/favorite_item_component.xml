@@ -22,11 +22,19 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRemove"
-            style="@style/BaseButton.TextButton"
+            style="@style/BaseButton.TextButton.Secondary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvwText"
             android:text="@string/remove"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnShare"
+            style="@style/BaseButton.TextButton.Primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnRemove"
+            app:layout_constraintTop_toBottomOf="@+id/tvwText"
+            android:text="@string/share"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

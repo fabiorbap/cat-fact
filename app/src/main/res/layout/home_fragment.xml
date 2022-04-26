@@ -13,56 +13,66 @@
         android:id="@+id/imgCatLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:tint="@color/pink_dark"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15"
-        app:srcCompat="@drawable/ic_baseline_cat_128"
-        android:tint="@color/pink_dark"/>
+        app:srcCompat="@drawable/ic_baseline_cat_128" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieLoading"
         android:layout_width="@dimen/cat_loading_width"
         android:layout_height="@dimen/cat_loading_height"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btnFact"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgCatLogo"
-        app:layout_constraintBottom_toTopOf="@id/btnFact"
-        app:lottie_loop="true"
         app:lottie_fileName="anim/animation_cat_loading.json"
-        android:visibility="gone"/>
+        app:lottie_loop="true" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvwFact"
         style="@style/BaseTextStyle.Body1"
+        app:layout_constraintBottom_toTopOf="@id/btnFact"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCatLogo"
-        app:layout_constraintBottom_toTopOf="@id/btnFact" />
+        app:layout_constraintTop_toBottomOf="@+id/imgCatLogo" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnFact"
         style="@style/BaseButton.Icon"
         android:src="@drawable/ic_baseline_refresh_36"
+        android:tint="?android:textColorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgCatLogo"
-        app:layout_constraintVertical_bias="0.9"
-        android:tint="?android:textColorPrimary" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <br.fabiorachid.catfact.view.components.FavoriteButtonComponent
         android:id="@+id/btnAddFact"
         style="@style/BaseButton.Icon"
         android:gravity="center"
+        android:tint="@color/favorite_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgCatLogo"
-        app:layout_constraintVertical_bias="0.9"
-        android:tint="@color/favorite_red" />
+        app:layout_constraintVertical_bias="0.9" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnShare"
+        style="@style/BaseButton.Icon"
+        android:layout_marginEnd="-16dp"
+        android:src="@drawable/ic_baseline_share_24"
+        android:tint="?android:textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/margin_small"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

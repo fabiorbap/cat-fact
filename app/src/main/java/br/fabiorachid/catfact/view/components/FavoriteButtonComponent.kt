@@ -22,7 +22,7 @@ class FavoriteButtonComponent @JvmOverloads constructor(context: Context, attrs:
         }
     }
 
-    private fun setState(isChecked: Boolean) {
+    fun setState(isChecked: Boolean) {
         this.isChecked = isChecked
     }
 

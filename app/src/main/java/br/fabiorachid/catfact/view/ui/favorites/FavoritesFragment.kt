@@ -14,6 +14,7 @@ import br.fabiorachid.catfact.R
 import br.fabiorachid.catfact.databinding.FavoritesFragmentBinding
 import br.fabiorachid.catfact.model.data.local.FactLocalModel
 import br.fabiorachid.catfact.model.data.remote.ResponseStatus
+import br.fabiorachid.catfact.utils.shareFact
 import br.fabiorachid.catfact.utils.showSnackbar
 import br.fabiorachid.catfact.view.MainActivity
 import br.fabiorachid.catfact.view.ui.BaseFragment
@@ -97,7 +98,7 @@ class FavoritesFragment : BaseFragment() {
     }
 
     private fun setupAdapter() {
-        adapter = FavoritesAdapter(favoritesList, this::onRemoveClick)
+        adapter = FavoritesAdapter(favoritesList, this::onRemoveClick, this::onShareClick)
     }
 
     private fun setupRecyclerView() {
@@ -126,6 +127,10 @@ class FavoritesFragment : BaseFragment() {
             alertDialog.dismiss()
         }
         alertDialog?.show()
+    }
+
+    private fun onShareClick(fact: String) {
+        shareFact(requireContext(), getString(R.string.share_message, fact))
     }
 
     private fun deleteFactFromFavorites(factId: Int) {

@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import br.fabiorachid.catfact.model.data.local.FactLocalModel
 import br.fabiorachid.catfact.view.components.FavoriteItemComponent
 
-class FavoritesAdapter (var favoritesList: List<FactLocalModel>, var onRemoveClick: (id: Int) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FavoritesAdapter (var favoritesList: List<FactLocalModel>,
+                        var onRemoveClick: (id: Int) -> Unit, var onShareClick: (shareText: String) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = FavoriteItemComponent(parent.context)
@@ -20,6 +21,7 @@ class FavoritesAdapter (var favoritesList: List<FactLocalModel>, var onRemoveCli
         with(itemView) {
             text = listItem.fact
             onRemoveClick = { this@FavoritesAdapter.onRemoveClick.invoke(listItem.factId)}
+            onShareClick = { this@FavoritesAdapter.onShareClick.invoke(listItem.fact)}
         }
     }
 

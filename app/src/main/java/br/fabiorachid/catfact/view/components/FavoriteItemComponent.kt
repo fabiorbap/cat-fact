@@ -23,6 +23,12 @@ class FavoriteItemComponent @JvmOverloads constructor(context: Context, attrs: A
             binding.btnRemove.setOnClickListener { value.invoke() }
         }
 
+    var onShareClick: () -> Unit = {}
+        set(value) {
+            field = value
+            binding.btnShare.setOnClickListener { value.invoke() }
+        }
+
     init {
         binding = FavoriteItemComponentBinding.inflate(LayoutInflater.from(context), this, true)
     }
