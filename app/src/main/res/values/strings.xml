@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cat Fact</string>
+    <string name="app_name">Cat Facts</string>
 
     <!-- Home -->
     <string name="home_title">Cat Facts</string>
