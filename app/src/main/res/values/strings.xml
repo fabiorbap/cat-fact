@@ -12,12 +12,14 @@
     <string name="favorites_delete_fact_success">Fact removed from favorites.</string>
     <string name="favorites_delete_fact_error">Could not remove fact from favorites, please retry</string>
     <string name="favorites_empty">You do not have any favorite facts!</string>
+    <string name="favorites_remove_confirmation">Are you sure you want to remove this fact from your favorites?</string>
 
     <!-- Generic -->
     <string name="network_error">Please check your internet connection or retry.</string>
     <string name="generic_error">Oops! Something went wrong.</string>
     <string name="retry">Retry</string>
     <string name="remove">Remove</string>
+    <string name="cancel">Cancel</string>
 
 
 

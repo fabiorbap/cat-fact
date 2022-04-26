@@ -9,7 +9,11 @@
         <item name="colorSecondary">@color/deep_orange_300</item>
         <item name="colorSecondaryVariant">@color/deep_orange_dark</item>
         <item name="colorOnSecondary">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
     </style>
+
+
+
 </resources>

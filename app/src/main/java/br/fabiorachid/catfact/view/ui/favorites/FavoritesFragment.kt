@@ -1,11 +1,14 @@
 package br.fabiorachid.catfact.view.ui.favorites
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.fabiorachid.catfact.R
 import br.fabiorachid.catfact.databinding.FavoritesFragmentBinding
@@ -16,6 +19,7 @@ import br.fabiorachid.catfact.view.MainActivity
 import br.fabiorachid.catfact.view.ui.BaseFragment
 import br.fabiorachid.catfact.viewmodel.FactsViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
 
 class FavoritesFragment : BaseFragment() {
 
@@ -54,8 +58,7 @@ class FavoritesFragment : BaseFragment() {
             if (it?.data?.isEmpty() == true) {
                 hideList()
                 return@observe
-            }
-            else {
+            } else {
                 showList()
                 favoritesList.clear()
                 //From most recent to oldest favorite
@@ -76,7 +79,7 @@ class FavoritesFragment : BaseFragment() {
     }
 
     private fun onDeleteFavoriteSuccess(id: Int?) {
-        val position = favoritesList.indexOfFirst {favorite -> favorite.factId == id }
+        val position = favoritesList.indexOfFirst { favorite -> favorite.factId == id }
         favoritesList.removeIf { favorite -> favorite.factId == id }
         adapter.notifyItemRemoved(position)
         showSnackbar(
@@ -101,11 +104,32 @@ class FavoritesFragment : BaseFragment() {
         setupAdapter()
         _binding?.rcvFavoritesList?.adapter = adapter
         _binding?.rcvFavoritesList?.layoutManager = LinearLayoutManager(requireContext())
-        _binding?.rcvFavoritesList?.addItemDecoration(VerticalSpacingDecoration(resources.getDimension(R.dimen.margin_medium).toInt()))
+        _binding?.rcvFavoritesList?.addItemDecoration(
+            VerticalSpacingDecoration(
+                resources.getDimension(
+                    R.dimen.margin_medium
+                ).toInt()
+            )
+        )
     }
 
-    private fun onRemoveClick(id: Int) {
-        val favorite = favoritesList.find { favorite -> favorite.factId == id }
+    private fun onRemoveClick(factId: Int) {
+        val alertDialog: android.app.AlertDialog? = android.app.AlertDialog.Builder(requireActivity()).create()
+        alertDialog?.setMessage(getString(R.string.favorites_remove_confirmation))
+
+        alertDialog?.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.remove)
+        ) { _, _ ->
+            deleteFactFromFavorites(factId)
+        }
+        alertDialog?.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel)
+        ) { _, _ ->
+            alertDialog.dismiss()
+        }
+        alertDialog?.show()
+    }
+
+    private fun deleteFactFromFavorites(factId: Int) {
+        val favorite = favoritesList.find { favorite -> favorite.factId == factId }
         factsViewModel.deleteFactFromFavorites(favorite ?: FactLocalModel(0, ""))
     }
 
