@@ -38,7 +38,7 @@ If you can't run the project, please, let me know so I can help you.
 I used the [MVVM architecture](https://developer.android.com/jetpack/guide), for separation of concerns between layers (decreasing code coupling),
 code reusability and better readability, and also due to the ViewModel from Android Architecture Components
 being lifecycle aware, which is important to prevent crashes and leaks.
-I also used LiveData to make the code more reactive and also more lifecycle aware.
+I also used LiveData to make the code reactive and also lifecycle aware.
 
 ## Libraries
 
