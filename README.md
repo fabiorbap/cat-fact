@@ -83,8 +83,13 @@ Run the loading animation with the cat
 ## Design
 
 I decided for a simple, minimalistic design which does not distract the user from the fact.
+
 I also wanted the app to be playful, that's why I included the cat face in the main screen and as the app icon and also the cat loading.
+
 I chose dark pink as the primary color for the app because I felt it also gave the app a feeling of playfulness, of fun.
+
 In the favorites screen, a dialog shows when the user tries to remove the fact, because if the user accidentally deleted the fact, then he/she would have to find it again.
+
 The dialog is not present in the fact screen, after the user presses the heart button, because the user can easily favorite the fact in display again. I thought the dialog would be intrusive in this screen.
+
 I implemented a share functionality because I believe users would enjoy showing the information to their friends. The message says "Download it in the Play Store", but I have not uploaded it there, it was just as an example.
