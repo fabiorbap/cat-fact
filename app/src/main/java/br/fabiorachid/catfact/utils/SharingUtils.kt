@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import br.fabiorachid.catfact.R
 
 fun shareFact(

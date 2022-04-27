@@ -14,7 +14,7 @@ class CatFactApplication : Application() {
     }
 
     private fun initializeKoin() {
-        val listOfModules = listOf(appModule,
+        val listOfModules = listOf(
             modelModule,
             networkModule,
             viewModelModule,

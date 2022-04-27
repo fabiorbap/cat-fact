@@ -118,6 +118,25 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    private fun onGetFactLoading() {
+        showLoading()
+    }
+
+    private fun onGetFactSuccess(it: FactAppModel?) {
+        hideLoading()
+        _binding?.tvwFact?.setHtmlText(it?.fact ?: "")
+        factsViewModel.isFactOnFavorites(it?.fact ?: "")
+    }
+
+    private fun onGetFactError(error: Error?) {
+        hideLoading()
+        if (!ConnectionUtil.isOnline(requireContext())) showNetworkError(
+            this::getFact,
+            _binding?.root
+        )
+        else showGenericError(this::getFact, error?.errorMessage ?: "", _binding?.root)
+    }
+
     private fun observeAddFactToFavoritesLiveData() {
         factsViewModel.addFavoriteFactLD.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -175,24 +194,7 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun onGetFactLoading() {
-        showLoading()
-    }
 
-    private fun onGetFactSuccess(it: FactAppModel?) {
-        hideLoading()
-        _binding?.tvwFact?.setHtmlText(it?.fact ?: "")
-        factsViewModel.isFactOnFavorites(it?.fact ?: "")
-    }
-
-    private fun onGetFactError(error: Error?) {
-        hideLoading()
-        if (!ConnectionUtil.isOnline(requireContext())) showNetworkError(
-            this::getFact,
-            _binding?.root
-        )
-        else showGenericError(this::getFact, error?.errorMessage ?: "", _binding?.root)
-    }
 
     override fun onPause() {
         if (_binding?.tvwFact?.text?.isNotEmpty() == true) factsViewModel.loadedFact = _binding?.tvwFact?.text.toString()

@@ -7,13 +7,7 @@ import android.net.NetworkInfo
 import android.net.wifi.WifiManager
 import android.net.wifi.WifiInfo
 
-/**
- * Created by jeitto on 18/10/16.
- */
-class ConnectionUtil constructor(private val context: Context) {
-
-    val isOnline: Boolean
-        get() = isOnline(context)
+class ConnectionUtil {
 
     companion object {
 
