@@ -38,7 +38,7 @@ The project should run and check if you have all the tools required to run it.
 You may be required to download the project Build Tools or SDK version so that
 you can run it.
 
-After you have downloaded everything required to run the project, click "Run", which will open an emulator or run into a connected device.
+After you have downloaded everything required to run the project, click "Run", which will open an emulator or run into a connected device. If you are having problems running the app, try executing "Clean Project" and "Invalidate Caches" and trying to run it again.
 
 If you can't run the project, please, let me know so I can help you.
 
