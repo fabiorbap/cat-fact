@@ -1,4 +1,8 @@
+
+
 # Cat Facts
+
+![ic_cat_facts](https://user-images.githubusercontent.com/12398089/165428762-851e6775-9891-47cd-9ee4-a19f0193f7fc.png)
 
 ## Description
 
