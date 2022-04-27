@@ -26,6 +26,7 @@ The JDK version is 11.0.12. Other details can be found in the code.
 ## Setup instructions
 
 Clone the repository to your computer and open it with Android Studio.
+Run the project in either `master` or `develop` branch, they are identical at this moment.
 The project should run and check if you have all the tools required to run it.
 You may be required to download the project Build Tools or SDK version so that
 you can run it.
