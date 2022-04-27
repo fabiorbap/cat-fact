@@ -89,6 +89,10 @@ Implement dependency injection to make the code less coupled and more reusable
 
 Run the loading animation with the cat
 
+### [View binding](https://developer.android.com/topic/libraries/view-binding)
+
+Make XML views interact with code in an easier way
+
 ## Design
 
 I decided for a simple, minimalistic design which does not distract the user from the fact.
