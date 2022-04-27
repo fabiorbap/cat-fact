@@ -16,7 +16,7 @@ on a list which can be viewed even when connection isn't available.
 The user can also remove the fact from the list.
 
 I also added the sharing functionality, which allows the user to share
-a quote with other people through other apps.
+a fact with other people through other apps.
 
 Below there are sections that talk about important topics such as architecture, libraries used and additional details about the development.
 
